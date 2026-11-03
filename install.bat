@@ -30,13 +30,13 @@ if %ans% equ 2 (
     if %jsh_installed% equ true (
         notepad "C:\Program Files\JSH\README.md"
     ) else (
-        exit
+        exit /b
     )
 )
 
 if %ans% equ 3 goto verify
 
-if %ans% equ 4 exit
+if %ans% equ 4 exit /b
 
 echo Thats Not A Valid Option
 cls
@@ -61,7 +61,7 @@ if %ans% equ y (
     echo Tip: Relaunch This Installed To Uninstall
     echo Continuing Will Exit The Script.
     pause
-    exit
+    exit /b
 ) else (
     echo You Must Have GIT Installed To Continue!
     pause
@@ -74,6 +74,10 @@ cls
 title JSH_Installer_The_Uninstall_Part
 echo ====== JSH ======
 set /p "ans=Are You Sure You Want To Uninstall JSH? [Y/N]: "
+if %ans% neq y (
+    cls
+    goto start
+)
 echo Uninstalling JSH
 rmdir /s /q "C:\Program Files\JSH"
 setx jsh_installed no
